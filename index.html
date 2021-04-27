@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Music Player</title>
+</head>
+
+<body>
+    <div class="player">
+        <div class="header">
+            <div class="thumbnail"></div>
+            <div class="title">Title</div>
+            <div class="artist">by Artist</div>
+        </div>
+        <div class="controls">
+            <div class="back" onclick="back()">
+                <i class="fas fa-backward"></i>
+            </div>
+            <div class="playpause" onclick="playpause()">
+                <i class="fas fa-play"></i>
+            </div>
+            <div class="forward" onclick="forward()">
+                <i class="fas fa-forward"></i>
+            </div>
+        </div>
+        <div class="slider">
+            <div class="current-time">00:00</div>
+            <input type="range" min="1" max="100" value="0" class="time-slider" onchange="goTo()">
+            <div class="total-time">00:00</div>
+        </div>
+        <!-- <div class="slider">
+            <i class="fas fa-volume-down"></i>
+            <input type="range" min="1" max="100" value="99" class="volume-slider" onchange="setVolume()">
+            <i class="fas fa-volume-up"></i>
+        </div> -->
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

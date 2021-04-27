@@ -1,0 +1,97 @@
+body {
+	background-color: #161d6f;
+	font-family: "Dosis", sans-serif;
+	color: #c7ffd8;
+}
+
+.player {
+	height: 95vh;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 25px;
+}
+.thumbnail {
+	margin: 25px;
+	height: 250px;
+	width: 250px;
+	background-image: URL("https://image.freepik.com/free-vector/music-notes-pink-watercolor-background_1048-2266.jpg");
+	background-size: cover;
+	background-position: center;
+	border-radius: 5%;
+}
+
+.title {
+	font-size: 2rem;
+}
+
+.artist {
+	font-size: 1.5rem;
+}
+
+.controls {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.back,
+.playpause,
+.forward {
+	padding: 30px;
+}
+
+.playpause {
+	font-size: 1.5rem;
+}
+
+.back:hover,
+.playpause:hover,
+.forward:hover {
+	color: #98ded9;
+}
+
+.slider {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 15px;
+}
+
+.time-slider {
+	-webkit-appearance: none;
+	margin: 15px;
+	height: 6px;
+	width: 250px;
+	border-radius: 5px;
+	background-color: #c7ffd8;
+}
+
+.time-slider:focus {
+	outline: none;
+}
+
+.time-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 15px;
+	width: 15px;
+	background: #f6f6f6;
+	border: 2px solid pink;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+i.fa-play,
+i.fa-pause,
+i.fa-forward,
+i.fa-backward {
+	cursor: pointer;
+}
