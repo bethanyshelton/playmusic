@@ -11,7 +11,7 @@ let currentTime = document.querySelector(".current-time");
 let totalTime = document.querySelector(".total-time");
 
 let trackIndex = 0;
-let isPlaying = false;
+let playing = false;
 let updateTimer;
 
 //List of song tracks
@@ -102,24 +102,103 @@ let trackList = [
 	},
 ];
 
+//Create a new javascript Audio element
+let currentTrack = new Audio();
+// let currentTrack = document.createElement("audio");
+
+function loadTrack(trackIndex) {
+	//Clear timer from previously played tracks with javascript clearInterval method
+	clearInterval(updateTimer);
+	resetValues();
+
+	//Load track to audio element
+	currentTrack.src = trackList[trackIndex].path;
+	currentTrack.load();
+
+	//Change title and artist text
+	title.textContent = trackList[trackIndex].name;
+	artist.textContent = trackList[trackIndex].artist;
+
+	//Each track should have it's own thumbnail image
+	thumbnail.style.backgroundImage = trackList[trackIndex].image;
+
+	//Slider should move with track progress
+	// updateTimer = setInterval(seekUpdate, 1000);
+
+	//Play the next track when the current track ends
+	currentTrack.addEventListener("ended", nextTrack);
+}
+
+loadTrack(trackIndex);
+
+//Reset everything back to the beginning
+function resetValues() {
+	//Reset both timers
+	currentTime.textContent = "00.00";
+	totalTime.textContent = "00.00";
+	//Reset the slider back to the beginning
+	timeSlider.value = 0;
+}
+
 //Play all songs in order when 'play' button is clicked
-//Create the audio element
-let currentTrack = document.createElement("audio");
-//Load track to audio element
+function playPause() {
+	//if nothing is playing start playing otherwise pause
+	if (!playing) {
+		playTrack();
+	} else {
+		pauseTrack();
+	}
+}
 
-//  Change play button icon to pause button icon
-//  Change title and artist text
+function playTrack() {
+	//play the track
+	currentTrack.play();
+	//change playing variable to update playPause()
+	playing = true;
+	//  Change play button icon to pause button icon
+	playpauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+}
 
-//Pause playing when 'pause' button is clicked
-//  Change pause button icon to play button icon
+function pauseTrack() {
+	//Pause playing when 'pause' button is clicked
+	currentTrack.pause();
+	//change playing variable to update playPause()
+	playing = false;
+	//  Change pause button icon to play button icon
+	playpauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+
+playpauseBtn.addEventListener("click", playPause);
 
 //Play the previous track when 'back' button is clicked
+function nextTrack() {
+	//if currently playing last track go back to beginning
+	if (trackIndex < trackList.length - 1) {
+		trackIndex++;
+	} else {
+		trackIndex = 0;
+	}
+	loadTrack(trackIndex);
+	playTrack();
+}
+
+forwardBtn.addEventListener("click", nextTrack);
 
 //Play the next track when 'forward' button is clicked
+function prevTrack() {
+	//if currently playing first track go to last track
+	if (trackIndex > 0) {
+		trackIndex--;
+	} else {
+		trackIndex = trackList.length;
+	}
+	loadTrack(trackIndex);
+	playTrack();
+}
+
+backBtn.addEventListener("click", prevTrack);
 
 //Total Time should show the length of the track
 //  Current Time should show progress of track
-//  Slider should move with track progress
-//  Slider should be moveable to anyplace in the track
 
-//Each track should have it's own thumbnail image
+//  Slider should be moveable to anyplace in the track
