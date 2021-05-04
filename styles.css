@@ -1,11 +1,18 @@
 body {
-	background-color: #161d6f;
+	background: rgb(2, 0, 36);
+	background: linear-gradient(
+		42deg,
+		rgba(2, 0, 36, 1) 0%,
+		rgba(8, 8, 158, 1) 50%,
+		rgba(0, 212, 255, 1) 100%
+	);
 	font-family: "Dosis", sans-serif;
 	color: #c7ffd8;
+	margin: 0;
 }
 
 .player {
-	height: 95vh;
+	height: 100vh;
 	display: flex;
 	align-items: center;
 	flex-direction: column;

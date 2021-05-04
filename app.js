@@ -120,7 +120,7 @@ function loadTrack(trackIndex) {
 	artist.textContent = trackList[trackIndex].artist;
 
 	//Each track should have it's own thumbnail image
-	thumbnail.style.backgroundImage = trackList[trackIndex].image;
+	thumbnail.style.backgroundImage = "url(" + trackList[trackIndex].image + ")";
 
 	//Slider should move with track progress
 	// updateTimer = setInterval(seekUpdate, 1000);
