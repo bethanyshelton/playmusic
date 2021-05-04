@@ -1,15 +1,3 @@
-let thumbnail = document.querySelector(".thumbnail");
-let title = document.querySelector(".title");
-let artist = document.querySelector(".artist");
-
-let backBtn = document.querySelector(".back");
-let playpauseBtn = document.querySelector(".playpause");
-let forwardBtn = document.querySelector(".forward");
-
-let timeSlider = document.querySelector(".time-slider");
-let currentTime = document.querySelector(".current-time");
-let totalTime = document.querySelector(".total-time");
-
 let trackIndex = 0;
 let playing = false;
 let updateTimer;
@@ -104,7 +92,6 @@ let trackList = [
 
 //Create a new javascript Audio element
 let currentTrack = new Audio();
-// let currentTrack = document.createElement("audio");
 
 function loadTrack(trackIndex) {
 	//Clear timer from previously played tracks with javascript clearInterval method
@@ -116,16 +103,17 @@ function loadTrack(trackIndex) {
 	currentTrack.load();
 
 	//Change title and artist text
-	title.textContent = trackList[trackIndex].name;
-	artist.textContent = trackList[trackIndex].artist;
+	document.querySelector(".title").textContent = trackList[trackIndex].name;
+	document.querySelector(".artist").textContent = trackList[trackIndex].artist;
 
 	//Each track should have it's own thumbnail image
-	thumbnail.style.backgroundImage = "url(" + trackList[trackIndex].image + ")";
+	document.querySelector(".thumbnail").style.backgroundImage =
+		"url(" + trackList[trackIndex].image + ")";
 
 	//Slider should move with track progress
 	// updateTimer = setInterval(seekUpdate, 1000);
 
-	//Play the next track when the current track ends
+	//Play the next track automatically when the current track ends
 	currentTrack.addEventListener("ended", nextTrack);
 }
 
@@ -134,10 +122,10 @@ loadTrack(trackIndex);
 //Reset everything back to the beginning
 function resetValues() {
 	//Reset both timers
-	currentTime.textContent = "00.00";
-	totalTime.textContent = "00.00";
+	document.querySelector(".current-time").textContent = "00.00";
+	document.querySelector(".total-time").textContent = "00.00";
 	//Reset the slider back to the beginning
-	timeSlider.value = 0;
+	document.querySelector(".time-slider").value = 0;
 }
 
 //Play all songs in order when 'play' button is clicked
@@ -156,7 +144,8 @@ function playTrack() {
 	//change playing variable to update playPause()
 	playing = true;
 	//  Change play button icon to pause button icon
-	playpauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+	document.querySelector(".playpause").innerHTML =
+		'<i class="fas fa-pause"></i>';
 }
 
 function pauseTrack() {
@@ -165,10 +154,11 @@ function pauseTrack() {
 	//change playing variable to update playPause()
 	playing = false;
 	//  Change pause button icon to play button icon
-	playpauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+	document.querySelector(".playpause").innerHTML =
+		'<i class="fas fa-play"></i>';
 }
 
-playpauseBtn.addEventListener("click", playPause);
+document.querySelector(".playpause").addEventListener("click", playPause);
 
 //Play the previous track when 'back' button is clicked
 function nextTrack() {
@@ -182,7 +172,7 @@ function nextTrack() {
 	playTrack();
 }
 
-forwardBtn.addEventListener("click", nextTrack);
+document.querySelector(".forward").addEventListener("click", nextTrack);
 
 //Play the next track when 'forward' button is clicked
 function prevTrack() {
@@ -196,9 +186,10 @@ function prevTrack() {
 	playTrack();
 }
 
-backBtn.addEventListener("click", prevTrack);
+document.querySelector(".back").addEventListener("click", prevTrack);
 
 //Total Time should show the length of the track
+
 //  Current Time should show progress of track
 
 //  Slider should be moveable to anyplace in the track
