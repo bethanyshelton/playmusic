@@ -96,7 +96,7 @@ let currentTrack = new Audio();
 function loadTrack(trackIndex) {
 	//Clear timer from previously played tracks with javascript clearInterval method
 	clearInterval(updateTimer);
-	resetValues();
+	resetTimers();
 
 	//Load track to audio element
 	currentTrack.src = trackList[trackIndex].path;
@@ -111,7 +111,7 @@ function loadTrack(trackIndex) {
 		"url(" + trackList[trackIndex].image + ")";
 
 	//Slider should move with track progress
-	// updateTimer = setInterval(seekUpdate, 1000);
+	updateTimer = setInterval(sliderUpdate, 1000);
 
 	//Play the next track automatically when the current track ends
 	currentTrack.addEventListener("ended", nextTrack);
@@ -120,10 +120,10 @@ function loadTrack(trackIndex) {
 loadTrack(trackIndex);
 
 //Reset everything back to the beginning
-function resetValues() {
+function resetTimers() {
 	//Reset both timers
-	document.querySelector(".current-time").textContent = "00.00";
-	document.querySelector(".total-time").textContent = "00.00";
+	document.querySelector(".current-time").textContent = "0.00";
+	document.querySelector(".total-time").textContent = "0.00";
 	//Reset the slider back to the beginning
 	document.querySelector(".time-slider").value = 0;
 }
@@ -188,8 +188,44 @@ function prevTrack() {
 
 document.querySelector(".back").addEventListener("click", prevTrack);
 
-//Total Time should show the length of the track
+function sliderTo() {
+	//Play music starting at the slider position
+	currentTrack.currentTime =
+		currentTrack.duration *
+		(document.querySelector(".time-slider").value / 100);
+}
 
-//  Current Time should show progress of track
+document.querySelector(".time-slider").addEventListener("change", sliderTo);
 
-//  Slider should be moveable to anyplace in the track
+function sliderUpdate() {
+	//Time slider should show song progress
+	//	Once the song is loaded and duration is a valid number move slider to position
+	if (!isNaN(currentTrack.duration)) {
+		document.querySelector(".time-slider").value =
+			currentTrack.currentTime * (100 / currentTrack.duration);
+	}
+
+	//Update total time to show length of song
+	let totalMinutes = Math.floor(currentTrack.duration / 60);
+	let totalSeconds = Math.floor(currentTrack.duration - totalMinutes * 60);
+
+	if (totalSeconds < 10) {
+		totalSeconds = "0" + totalSeconds;
+	}
+
+	document.querySelector(".total-time").textContent =
+		totalMinutes + ":" + totalSeconds;
+
+	//Update current time to show progress of song
+	let currentMinutes = Math.floor(currentTrack.currentTime / 60);
+	let currentSeconds = Math.floor(
+		currentTrack.currentTime - currentMinutes * 60
+	);
+
+	if (currentSeconds < 10) {
+		currentSeconds = "0" + currentSeconds;
+	}
+
+	document.querySelector(".current-time").textContent =
+		currentMinutes + ":" + currentSeconds;
+}

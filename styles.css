@@ -30,7 +30,6 @@ body {
 	margin: 25px;
 	height: 250px;
 	width: 250px;
-	background-image: URL("https://image.freepik.com/free-vector/music-notes-pink-watercolor-background_1048-2266.jpg");
 	background-size: cover;
 	background-position: center;
 	border-radius: 5%;
@@ -77,7 +76,7 @@ body {
 	-webkit-appearance: none;
 	margin: 15px;
 	height: 6px;
-	width: 250px;
+	width: 200px;
 	border-radius: 5px;
 	background-color: #c7ffd8;
 }
